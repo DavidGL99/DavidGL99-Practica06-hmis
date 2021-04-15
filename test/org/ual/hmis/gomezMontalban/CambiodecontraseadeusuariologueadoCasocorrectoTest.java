@@ -55,13 +55,13 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // 5 | click | linkText=Change password | 
     driver.findElement(By.linkText("Change password")).click();
     // 6 | executeScript | return Math.floor(Math.random()*15000) | cambioContraseña
-    vars.put("cambioContraseña", js.executeScript("return Math.floor(Math.random()*15000)"));
+    vars.put("cambioContrase�a", js.executeScript("return Math.floor(Math.random()*15000)"));
     // 7 | type | id=password | ${cambioContraseña}
     driver.findElement(By.id("password")).sendKeys("${cambioContraseña}");
     // 8 | click | id=confirm-password | 
     driver.findElement(By.id("confirm-password")).click();
     // 9 | type | id=confirm-password | ${cambioContraseña}
-    driver.findElement(By.id("confirm-password")).sendKeys("${cambioContraseña}");
+    driver.findElement(By.id("confirm-password")).sendKeys("${cambioContrase�a}");
     // 10 | click | css=.button-text | 
     driver.findElement(By.cssSelector(".button-text")).click();
     // 11 | click | id=header-account-menu-link | 
