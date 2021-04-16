@@ -45,17 +45,41 @@ public class CambiodecontraseadeusuariologueadoCasoincorrectoTest {
     // Test name: Cambio de contraseña de usuario logueado (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://localhost:1337/");
-    // 2 | setWindowSize | 1280x726 | 
-    driver.manage().window().setSize(new Dimension(1280, 726));
-    // 3 | click | linkText=Log in | 
-    driver.findElement(By.linkText("Log in")).click();
-    // 4 | type | css=.form-group:nth-child(2) > .form-control | biRjem-hazvis-vagma1
-    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("biRjem-hazvis-vagma1");
-    // 5 | type | css=.form-group:nth-child(1) > .form-control | guillermosysti@gmail.com
-    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys("guillermosysti@gmail.com");
-    // 6 | click | css=.ajax-button | 
-    driver.findElement(By.cssSelector(".ajax-button")).click();
+	  driver.get("http://localhost:1337/");
+	    // 2 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
+	    vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
+	    // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) | namerandom
+	    vars.put("namerandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)"));
+	    // 4 | setWindowSize | 750x691 | 
+	    driver.manage().window().setSize(new Dimension(750, 691));
+	    // 5 | click | linkText=Sign up | 
+	    driver.findElement(By.linkText("Sign up")).click();
+	    // 6 | click | id=full-name | 
+	    driver.findElement(By.id("full-name")).click();
+	    // 7 | type | id=full-name | ${namerandom}
+	    driver.findElement(By.id("full-name")).sendKeys(vars.get("namerandom").toString());
+	    // 8 | click | id=email-address | 
+	    driver.findElement(By.id("email-address")).click();
+	    // 9 | type | id=email-address | ${emailrandom}
+	    driver.findElement(By.id("email-address")).sendKeys(vars.get("emailrandom").toString());
+	    // 10 | click | id=password | 
+	    driver.findElement(By.id("password")).click();
+	    // 11 | type | id=password | 1234
+	    driver.findElement(By.id("password")).sendKeys("1234");
+	    // 12 | click | id=confirm-password | 
+	    driver.findElement(By.id("confirm-password")).click();
+	    // 13 | type | id=confirm-password | 1234
+	    driver.findElement(By.id("confirm-password")).sendKeys("1234");
+	    // 14 | click | id=terms-agreement | 
+	    driver.findElement(By.id("terms-agreement")).click();
+	    // 15 | click | css=.ajax-button | 
+	    driver.findElement(By.cssSelector(".ajax-button")).click();
+	    
+	    {
+	    	  WebDriverWait wait = new WebDriverWait(driver, 30);
+	    	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+	    }
+
     // 7 | click | id=header-account-menu-link | 
     driver.findElement(By.id("header-account-menu-link")).click();
     // 8 | click | linkText=Settings | 
@@ -71,6 +95,6 @@ public class CambiodecontraseadeusuariologueadoCasoincorrectoTest {
     // 13 | click | css=.button-text | 
     driver.findElement(By.cssSelector(".button-text")).click();
     // 14 | assertText | xpath=//div[@id='edit-password']/div[2]/form/div/div[2]/div/div | Your new password and confirmation do not match.
-    assertThat(driver.findElement(By.xpath("//div[@id=\'edit-password\']/div[2]/form/div/div[2]/div/div")).getText(), is("Your new password and confirmation do not match."));
+    assertEquals(driver.findElement(By.xpath("//div[@id=\'edit-password\']/div[2]/form/div/div[2]/div/div")).getText(), "Your new password and confirmation do not match.");
   }
 }

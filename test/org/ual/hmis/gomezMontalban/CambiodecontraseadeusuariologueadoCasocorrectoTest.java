@@ -45,9 +45,45 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // Test name: Cambio de contraseña de usuario logueado (Caso correcto)
     // Step # | name | target | value
     // 1 | open | /welcome | 
-    driver.get("http://localhost:1337/welcome");
-    // 2 | setWindowSize | 1280x722 | 
-    driver.manage().window().setSize(new Dimension(1280, 722));
+	  driver.get("http://localhost:1337/");
+	    // 2 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
+	    vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
+	    // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) | namerandom
+	    vars.put("namerandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)"));
+	    // 4 | setWindowSize | 750x691 | 
+	    driver.manage().window().setSize(new Dimension(750, 691));
+	    // 5 | click | linkText=Sign up | 
+	    driver.findElement(By.linkText("Sign up")).click();
+	    // 6 | click | id=full-name | 
+	    driver.findElement(By.id("full-name")).click();
+	    // 7 | type | id=full-name | ${namerandom}
+	    driver.findElement(By.id("full-name")).sendKeys(vars.get("namerandom").toString());
+	    // 8 | click | id=email-address | 
+	    driver.findElement(By.id("email-address")).click();
+	    // 9 | type | id=email-address | ${emailrandom}
+	    driver.findElement(By.id("email-address")).sendKeys(vars.get("emailrandom").toString());
+	    // 10 | click | id=password | 
+	    driver.findElement(By.id("password")).click();
+	    // 11 | type | id=password | 1234
+	    driver.findElement(By.id("password")).sendKeys("1234");
+	    // 12 | click | id=confirm-password | 
+	    driver.findElement(By.id("confirm-password")).click();
+	    // 13 | type | id=confirm-password | 1234
+	    driver.findElement(By.id("confirm-password")).sendKeys("1234");
+	    // 14 | click | id=terms-agreement | 
+	    driver.findElement(By.id("terms-agreement")).click();
+	    // 15 | click | css=.ajax-button | 
+	    driver.findElement(By.cssSelector(".ajax-button")).click();
+	    
+	    {
+	    	  WebDriverWait wait = new WebDriverWait(driver, 30);
+	    	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+	    }
+
+    
+    
+    
+    
     // 3 | click | id=header-account-menu-link | 
     driver.findElement(By.id("header-account-menu-link")).click();
     // 4 | click | linkText=Settings | 
@@ -55,13 +91,13 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // 5 | click | linkText=Change password | 
     driver.findElement(By.linkText("Change password")).click();
     // 6 | executeScript | return Math.floor(Math.random()*15000) | cambioContraseña
-    vars.put("cambioContrase�a", js.executeScript("return Math.floor(Math.random()*15000)"));
+    vars.put("cambioContraseña", js.executeScript("return Math.floor(Math.random()*15000)"));
     // 7 | type | id=password | ${cambioContraseña}
     driver.findElement(By.id("password")).sendKeys("${cambioContraseña}");
     // 8 | click | id=confirm-password | 
     driver.findElement(By.id("confirm-password")).click();
     // 9 | type | id=confirm-password | ${cambioContraseña}
-    driver.findElement(By.id("confirm-password")).sendKeys("${cambioContrase�a}");
+    driver.findElement(By.id("confirm-password")).sendKeys("${cambioContraseña}");
     // 10 | click | css=.button-text | 
     driver.findElement(By.cssSelector(".button-text")).click();
     // 11 | click | id=header-account-menu-link | 
@@ -69,9 +105,8 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // 12 | click | linkText=Sign out | 
     driver.findElement(By.linkText("Sign out")).click();
     // 13 | type | css=.form-group:nth-child(2) > .form-control | nAvXT6vYTnqa22
-    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("nAvXT6vYTnqa22");
     // 14 | type | css=.form-group:nth-child(1) > .form-control | gmm753@inlumine.ual.es
-    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys("gmm753@inlumine.ual.es");
+    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys(vars.get("emailrandom").toString());
     // 15 | click | css=.form-group:nth-child(2) > .form-control | 
     driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
     // 16 | type | css=.form-group:nth-child(2) > .form-control | ${cambioContraseña}
@@ -81,6 +116,10 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // 18 | click | css=h1 | 
     driver.findElement(By.cssSelector("h1")).click();
     // 19 | assertText | xpath=//div[@id='welcome']/div[2]/h1 | Welcome!
-    assertThat(driver.findElement(By.xpath("//div[@id=\'welcome\']/div[2]/h1")).getText(), is("Welcome!"));
+    
+    {
+  	  WebDriverWait wait = new WebDriverWait(driver, 30);
+  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+  }
   }
 }

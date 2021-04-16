@@ -45,9 +45,26 @@ public class EditarelperfildeusuariologueadoCasoincorrectoTest {
     // Test name: Editar el perfil de usuario logueado (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | /welcome | 
-    driver.get("http://localhost:1337/welcome");
-    // 2 | setWindowSize | 1280x721 | 
-    driver.manage().window().setSize(new Dimension(1280, 721));
+
+	  
+	  driver.get("http://localhost:1337/");
+	    // 2 | setWindowSize | 1280x722 | 
+	    driver.manage().window().setSize(new Dimension(1280, 722));
+	    // 3 | click | linkText=Log in | 
+	    driver.findElement(By.linkText("Log in")).click();
+	    // 4 | type | css=.form-group:nth-child(2) > .form-control | nAvXT6vYTnqa22e
+	    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("1234");
+	    // 5 | type | css=.form-group:nth-child(1) > .form-control | gmm753@inlumine.ual.es
+	    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys("david.parador99@gmail.com");
+	    // 6 | click | css=.ajax-button | 
+	    driver.findElement(By.cssSelector(".ajax-button")).click();
+	    
+	    {
+	    	  WebDriverWait wait = new WebDriverWait(driver, 30);
+	    	  wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
+	    }
+	  
+	    
     // 3 | click | id=header-account-menu-link | 
     driver.findElement(By.id("header-account-menu-link")).click();
     // 4 | click | linkText=Settings | 
@@ -57,14 +74,14 @@ public class EditarelperfildeusuariologueadoCasoincorrectoTest {
     // 6 | click | id=email-address | 
     driver.findElement(By.id("email-address")).click();
     // 7 | type | id=email-address | ual-110178.ual.es
-    driver.findElement(By.id("email-address")).sendKeys("ual-110178.ual.es");
+    driver.findElement(By.id("email-address")).sendKeys(Keys.CONTROL + "a");
+    driver.findElement(By.id("email-address")).sendKeys(Keys.DELETE);
     // 8 | click | css=.ajax-button | 
     driver.findElement(By.cssSelector(".ajax-button")).click();
     // 9 | executeScript | return document.getElementById("email-address").validationMessage | message
-    vars.put("message", js.executeScript("return document.getElementById(\"email-address\").validationMessage"));
     // 10 | echo | ${message} | 
-    System.out.println(vars.get("message").toString());
     // 11 | assert | message | Introduzca una dirección de correo.
-    assertEquals(vars.get("message").toString(), "Introduzca una dirección de correo.");
+    assertEquals(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), "Please enter a valid email address.");
+
   }
 }

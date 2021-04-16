@@ -51,12 +51,17 @@ public class LogindeusuarioCasocorrectoTest {
     // 3 | click | linkText=Log in | 
     driver.findElement(By.linkText("Log in")).click();
     // 4 | type | css=.form-group:nth-child(2) > .form-control | nAvXT6vYTnqa22e
-    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("nAvXT6vYTnqa22e");
+    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("1234");
     // 5 | type | css=.form-group:nth-child(1) > .form-control | gmm753@inlumine.ual.es
-    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys("gmm753@inlumine.ual.es");
+    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys("david.parador99@gmail.com");
     // 6 | click | css=.ajax-button | 
     driver.findElement(By.cssSelector(".ajax-button")).click();
     // 7 | assertText | xpath=//div[@id='welcome']/div[2]/h1 | Welcome!
-    assertThat(driver.findElement(By.xpath("//div[@id=\'welcome\']/div[2]/h1")).getText(), is("Welcome!"));
+    {
+  	  WebDriverWait wait = new WebDriverWait(driver, 30);
+  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+  }
+
+    assertEquals(driver.findElement(By.xpath("//div[@id=\'welcome\']/div[2]/h1")).getText(), "Welcome!");
   }
 }

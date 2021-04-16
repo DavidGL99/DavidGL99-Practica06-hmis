@@ -45,9 +45,22 @@ public class LogindeusuarionombreCasoincorrectoTest {
     // Test name: Login de usuario nombre (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | /welcome | 
-    driver.get("http://localhost:1337/welcome");
-    // 2 | setWindowSize | 1280x722 | 
-    driver.manage().window().setSize(new Dimension(1280, 722));
+	  driver.get("http://localhost:1337/");
+	    // 2 | setWindowSize | 1280x722 | 
+	    driver.manage().window().setSize(new Dimension(1280, 722));
+	    // 3 | click | linkText=Log in | 
+	    driver.findElement(By.linkText("Log in")).click();
+	    // 4 | type | css=.form-group:nth-child(2) > .form-control | nAvXT6vYTnqa22e
+	    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("1234");
+	    // 5 | type | css=.form-group:nth-child(1) > .form-control | gmm753@inlumine.ual.es
+	    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys("david.parador99@gmail.com");
+	    // 6 | click | css=.ajax-button | 
+	    driver.findElement(By.cssSelector(".ajax-button")).click();
+	    
+	    {
+	    	  WebDriverWait wait = new WebDriverWait(driver, 30);
+	    	  wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
+	    }
     // 3 | click | id=header-account-menu-link | 
     driver.findElement(By.id("header-account-menu-link")).click();
     // 4 | click | linkText=Sign out | 
@@ -61,6 +74,6 @@ public class LogindeusuarionombreCasoincorrectoTest {
     // 8 | click | css=.ajax-button | 
     driver.findElement(By.cssSelector(".ajax-button")).click();
     // 9 | assertText | css=.invalid-feedback | Please provide a valid email address.
-    assertThat(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), is("Please provide a valid email address."));
+    assertEquals(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), "Please provide a valid email address.");
   }
 }
