@@ -32,7 +32,7 @@ public class RegistrodeusuarioCasocorrectoTest {
   public void setUp() {
 	System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
 	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    driver = new FirefoxDriver();
+    driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
@@ -74,5 +74,12 @@ public class RegistrodeusuarioCasocorrectoTest {
     driver.findElement(By.id("terms-agreement")).click();
     // 15 | click | css=.ajax-button | 
     driver.findElement(By.cssSelector(".ajax-button")).click();
+    
+    {
+    	  WebDriverWait wait = new WebDriverWait(driver, 30);
+    	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+    }
+    assertEquals(driver.findElement(By.xpath("//div[@id=\'welcome\']/div[2]/h1")).getText(), "Welcome!");
+
   }
 }
