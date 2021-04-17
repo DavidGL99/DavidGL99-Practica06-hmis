@@ -32,7 +32,7 @@ public class RegistrodeusuarioCasocorrectoTest {
   public void setUp() {
 	System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
 	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    driver = new ChromeDriver();
+    driver = new FirefoxDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
@@ -45,7 +45,7 @@ public class RegistrodeusuarioCasocorrectoTest {
     // Test name: Registro de usuario (Caso correcto)
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://localhost:1337/");
+    driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
     // 2 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
     vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
     // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) | namerandom

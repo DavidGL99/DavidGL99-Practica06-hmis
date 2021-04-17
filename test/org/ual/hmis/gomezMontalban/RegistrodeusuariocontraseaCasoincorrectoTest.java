@@ -45,7 +45,7 @@ public class RegistrodeusuariocontraseaCasoincorrectoTest {
     // Test name: Registro de usuario contraseña (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
     // 2 | setWindowSize | 1280x584 | 
     driver.manage().window().setSize(new Dimension(1280, 584));
     // 3 | click | linkText=Sign up | 

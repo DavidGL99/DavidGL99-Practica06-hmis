@@ -45,7 +45,7 @@ public class RegistrodeusuariorepetircontraseaCasoincorrectoTest {
     // Test name: Registro de usuario repetir contraseña (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
     // 2 | setWindowSize | 1280x722 | 
     driver.manage().window().setSize(new Dimension(1280, 722));
     // 3 | click | linkText=Sign up | 
@@ -61,6 +61,6 @@ public class RegistrodeusuariorepetircontraseaCasoincorrectoTest {
     // 8 | click | css=.ajax-button | 
     driver.findElement(By.cssSelector(".ajax-button")).click();
     // 9 | assertText | css=.invalid-feedback | Your password and confirmation do not match.
-    assertThat(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), is("Your password and confirmation do not match."));
+    assertEquals(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), "Your password and confirmation do not match.");
   }
 }

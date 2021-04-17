@@ -45,7 +45,7 @@ public class RegistrodeusuarionombreCasoincorrectoTest {
     // Test name: Registro de usuario nombre(Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
     // 2 | setWindowSize | 936x692 | 
     driver.manage().window().setSize(new Dimension(936, 692));
     // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
@@ -73,10 +73,8 @@ public class RegistrodeusuarionombreCasoincorrectoTest {
     // 14 | click | css=.ajax-button | 
     driver.findElement(By.cssSelector(".ajax-button")).click();
     // 15 | executeScript | return document.getElementById("name-error").textContent | message
-    vars.put("message", js.executeScript("return document.getElementById(\"name-error\").textContent"));
-    // 16 | echo | ${message} | 
-    System.out.println(vars.get("message").toString());
-    // 17 | assert | message | Please enter your full name.
-    assertEquals(vars.get("message").toString(), "Please enter your full name.");
+    
+    assertEquals(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), "Please enter your full name.");
+
   }
 }

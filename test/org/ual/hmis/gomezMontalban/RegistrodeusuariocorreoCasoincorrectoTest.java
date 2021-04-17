@@ -45,7 +45,7 @@ public class RegistrodeusuariocorreoCasoincorrectoTest {
     // Test name: Registro de usuario correo (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
     // 2 | setWindowSize | 1280x720 | 
     driver.manage().window().setSize(new Dimension(1280, 720));
     // 3 | click | linkText=Sign up | 

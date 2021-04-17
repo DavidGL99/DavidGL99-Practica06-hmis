@@ -47,7 +47,7 @@ public class EditarelperfildeusuariologueadoCasoincorrectoTest {
     // 1 | open | /welcome | 
 
 	  
-	  driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
 	    // 2 | setWindowSize | 1280x722 | 
 	    driver.manage().window().setSize(new Dimension(1280, 722));
 	    // 3 | click | linkText=Log in | 
@@ -67,6 +67,12 @@ public class EditarelperfildeusuariologueadoCasoincorrectoTest {
 	    
     // 3 | click | id=header-account-menu-link | 
     driver.findElement(By.id("header-account-menu-link")).click();
+    
+    {
+  	  WebDriverWait wait = new WebDriverWait(driver, 30);
+  	  wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Settings")));
+  }
+    
     // 4 | click | linkText=Settings | 
     driver.findElement(By.linkText("Settings")).click();
     // 5 | click | linkText=Edit profile | 

@@ -32,7 +32,7 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
   public void setUp() {
 	System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
 	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    driver = new FirefoxDriver();
+    driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
@@ -45,7 +45,7 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // Test name: Cambio de contraseña de usuario logueado (Caso correcto)
     // Step # | name | target | value
     // 1 | open | /welcome | 
-	  driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
 	    // 2 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
 	    vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
 	    // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) | namerandom
@@ -77,7 +77,7 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
 	    
 	    {
 	    	  WebDriverWait wait = new WebDriverWait(driver, 30);
-	    	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+	    	  wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
 	    }
 
     
@@ -99,13 +99,30 @@ public class CambiodecontraseadeusuariologueadoCasocorrectoTest {
     // 9 | type | id=confirm-password | ${cambioContraseña}
     driver.findElement(By.id("confirm-password")).sendKeys("${cambioContraseña}");
     // 10 | click | css=.button-text | 
+    
+    {
+    	  WebDriverWait wait = new WebDriverWait(driver, 30);
+    	  wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".button-text")));
+    }
+    
     driver.findElement(By.cssSelector(".button-text")).click();
+	  //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='header-account-menu-link']")));
+    {
+  	  WebDriverWait wait = new WebDriverWait(driver, 30);
+  	  wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
+  }
     // 11 | click | id=header-account-menu-link | 
     driver.findElement(By.id("header-account-menu-link")).click();
     // 12 | click | linkText=Sign out | 
     driver.findElement(By.linkText("Sign out")).click();
     // 13 | type | css=.form-group:nth-child(2) > .form-control | nAvXT6vYTnqa22
     // 14 | type | css=.form-group:nth-child(1) > .form-control | gmm753@inlumine.ual.es
+    
+    {
+  	  WebDriverWait wait = new WebDriverWait(driver, 30);
+  	  wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".form-group:nth-child(1) > .form-control")));
+  }
+    
     driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys(vars.get("emailrandom").toString());
     // 15 | click | css=.form-group:nth-child(2) > .form-control | 
     driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();

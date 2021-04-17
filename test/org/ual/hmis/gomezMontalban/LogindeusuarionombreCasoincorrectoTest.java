@@ -45,7 +45,7 @@ public class LogindeusuarionombreCasoincorrectoTest {
     // Test name: Login de usuario nombre (Caso incorrecto)
     // Step # | name | target | value
     // 1 | open | /welcome | 
-	  driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
 	    // 2 | setWindowSize | 1280x722 | 
 	    driver.manage().window().setSize(new Dimension(1280, 722));
 	    // 3 | click | linkText=Log in | 

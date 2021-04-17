@@ -45,7 +45,7 @@ public class EditarelperfildeusuariologueadoCasocorrectoTest {
     // Test name: Editar el perfil de usuario logueado (Caso correcto)
     // Step # | name | target | value
     // 1 | open | /welcome | 
-	  driver.get("http://localhost:1337/");
+	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
 	    // 2 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
 	    vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
 	    // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) | namerandom
