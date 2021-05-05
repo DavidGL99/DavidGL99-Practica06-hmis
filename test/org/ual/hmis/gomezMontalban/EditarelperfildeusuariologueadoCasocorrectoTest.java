@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -24,93 +25,104 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-public class EditarelperfildeusuariologueadoCasocorrectoTest {
-  private WebDriver driver;
-  private Map<String, Object> vars;
-  JavascriptExecutor js;
-  @Before
-  public void setUp() {
-	System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
-	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    driver = new FirefoxDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-  @After
-  public void tearDown() {
-    driver.quit();
-  }
-  @Test
-  public void editarelperfildeusuariologueadoCasocorrecto() {
-    // Test name: Editar el perfil de usuario logueado (Caso correcto)
-    // Step # | name | target | value
-    // 1 | open | /welcome | 
-	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
-	    // 2 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
-	    vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
-	    // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) | namerandom
-	    vars.put("namerandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)"));
-	    // 4 | setWindowSize | 750x691 | 
-	    driver.manage().window().setSize(new Dimension(750, 691));
-	    // 5 | click | linkText=Sign up | 
-	    driver.findElement(By.linkText("Sign up")).click();
-	    // 6 | click | id=full-name | 
-	    driver.findElement(By.id("full-name")).click();
-	    // 7 | type | id=full-name | ${namerandom}
-	    driver.findElement(By.id("full-name")).sendKeys(vars.get("namerandom").toString());
-	    // 8 | click | id=email-address | 
-	    driver.findElement(By.id("email-address")).click();
-	    // 9 | type | id=email-address | ${emailrandom}
-	    driver.findElement(By.id("email-address")).sendKeys(vars.get("emailrandom").toString());
-	    // 10 | click | id=password | 
-	    driver.findElement(By.id("password")).click();
-	    // 11 | type | id=password | 1234
-	    driver.findElement(By.id("password")).sendKeys("1234");
-	    // 12 | click | id=confirm-password | 
-	    driver.findElement(By.id("confirm-password")).click();
-	    // 13 | type | id=confirm-password | 1234
-	    driver.findElement(By.id("confirm-password")).sendKeys("1234");
-	    // 14 | click | id=terms-agreement | 
-	    driver.findElement(By.id("terms-agreement")).click();
-	    // 15 | click | css=.ajax-button | 
-	    driver.findElement(By.cssSelector(".ajax-button")).click();
-	    
-	    {
-	    	  WebDriverWait wait = new WebDriverWait(driver, 30);
-	    	  wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
-	    }
-    // 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000)+"@ual.es" | emailRandom
-    // 4 | click | id=header-account-menu-link | 
-    driver.findElement(By.id("header-account-menu-link")).click();
-    // 5 | click | linkText=Settings | 
-    driver.findElement(By.linkText("Settings")).click();
-    // 6 | click | linkText=Edit profile | 
-    driver.findElement(By.linkText("Edit profile")).click();
-    // 7 | click | id=email-address | 
-    driver.findElement(By.id("email-address")).click();
-    // 8 | type | id=email-address | ${emailRandom}
-    driver.findElement(By.id("email-address")).sendKeys(Keys.CONTROL + "a");
-    driver.findElement(By.id("email-address")).sendKeys(Keys.DELETE);
-    
-    vars.put("nuevoemail", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
-    driver.findElement(By.id("email-address")).sendKeys(vars.get("nuevoemail").toString());
 
-    // 9 | click | css=.button-text | 
-    driver.findElement(By.cssSelector(".button-text")).click();
-    // 10 | click | id=header-account-menu-link | 
-    driver.findElement(By.id("header-account-menu-link")).click();
-    // 11 | click | linkText=Sign out | 
-    driver.findElement(By.linkText("Sign out")).click();
-    // 12 | type | css=.form-group:nth-child(1) > .form-control | ${emailRandom}
-    driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control")).sendKeys(vars.get("nuevoemail").toString());
-    // 13 | type | css=.form-group:nth-child(2) > .form-control | 123
-    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("1234");
-    // 14 | sendKeys | css=.form-group:nth-child(2) > .form-control | ${KEY_ENTER}
-    driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys(Keys.ENTER);
-    // 15 | assertText | xpath=//div[@id='welcome']/div[2]/h1 | Welcome!
-    {
-  	  WebDriverWait wait = new WebDriverWait(driver, 30);
-  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
-  }
-  assertEquals(driver.findElement(By.xpath("//div[@id=\'welcome\']/div[2]/h1")).getText(), "Welcome!");  }
+public class EditarelperfildeusuariologueadoCasocorrectoTest {
+	private WebDriver driver;
+	private Map<String, Object> vars;
+	JavascriptExecutor js;
+
+	@Before
+	public void setUp() {
+		// System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+		// System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
+		firefoxOptions.setHeadless(true);
+		driver = new FirefoxDriver();
+		js = (JavascriptExecutor) driver;
+		vars = new HashMap<String, Object>();
+	}
+
+	@After
+	public void tearDown() {
+		driver.quit();
+	}
+
+	@Test
+	public void editarelperfildeusuariologueadoCasocorrecto() {
+		// Test name: Editar el perfil de usuario logueado (Caso correcto)
+		// Step # | name | target | value
+		// 1 | open | /welcome |
+		driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
+		// 2 | executeScript | return "ual-" +
+		// Math.floor(Math.random()*1500000)+"@ual.es" | emailrandom
+		vars.put("emailrandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
+		// 3 | executeScript | return "ual-" + Math.floor(Math.random()*1500000) |
+		// namerandom
+		vars.put("namerandom", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)"));
+		// 4 | setWindowSize | 750x691 |
+		driver.manage().window().setSize(new Dimension(750, 691));
+		// 5 | click | linkText=Sign up |
+		driver.findElement(By.linkText("Sign up")).click();
+		// 6 | click | id=full-name |
+		driver.findElement(By.id("full-name")).click();
+		// 7 | type | id=full-name | ${namerandom}
+		driver.findElement(By.id("full-name")).sendKeys(vars.get("namerandom").toString());
+		// 8 | click | id=email-address |
+		driver.findElement(By.id("email-address")).click();
+		// 9 | type | id=email-address | ${emailrandom}
+		driver.findElement(By.id("email-address")).sendKeys(vars.get("emailrandom").toString());
+		// 10 | click | id=password |
+		driver.findElement(By.id("password")).click();
+		// 11 | type | id=password | 1234
+		driver.findElement(By.id("password")).sendKeys("1234");
+		// 12 | click | id=confirm-password |
+		driver.findElement(By.id("confirm-password")).click();
+		// 13 | type | id=confirm-password | 1234
+		driver.findElement(By.id("confirm-password")).sendKeys("1234");
+		// 14 | click | id=terms-agreement |
+		driver.findElement(By.id("terms-agreement")).click();
+		// 15 | click | css=.ajax-button |
+		driver.findElement(By.cssSelector(".ajax-button")).click();
+
+		{
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
+		}
+		// 3 | executeScript | return "ual-" +
+		// Math.floor(Math.random()*1500000)+"@ual.es" | emailRandom
+		// 4 | click | id=header-account-menu-link |
+		driver.findElement(By.id("header-account-menu-link")).click();
+		// 5 | click | linkText=Settings |
+		driver.findElement(By.linkText("Settings")).click();
+		// 6 | click | linkText=Edit profile |
+		driver.findElement(By.linkText("Edit profile")).click();
+		// 7 | click | id=email-address |
+		driver.findElement(By.id("email-address")).click();
+		// 8 | type | id=email-address | ${emailRandom}
+		driver.findElement(By.id("email-address")).sendKeys(Keys.CONTROL + "a");
+		driver.findElement(By.id("email-address")).sendKeys(Keys.DELETE);
+
+		vars.put("nuevoemail", js.executeScript("return \"ual-\" + Math.floor(Math.random()*1500000)+\"@ual.es\""));
+		driver.findElement(By.id("email-address")).sendKeys(vars.get("nuevoemail").toString());
+
+		// 9 | click | css=.button-text |
+		driver.findElement(By.cssSelector(".button-text")).click();
+		// 10 | click | id=header-account-menu-link |
+		driver.findElement(By.id("header-account-menu-link")).click();
+		// 11 | click | linkText=Sign out |
+		driver.findElement(By.linkText("Sign out")).click();
+		// 12 | type | css=.form-group:nth-child(1) > .form-control | ${emailRandom}
+		driver.findElement(By.cssSelector(".form-group:nth-child(1) > .form-control"))
+				.sendKeys(vars.get("nuevoemail").toString());
+		// 13 | type | css=.form-group:nth-child(2) > .form-control | 123
+		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys("1234");
+		// 14 | sendKeys | css=.form-group:nth-child(2) > .form-control | ${KEY_ENTER}
+		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).sendKeys(Keys.ENTER);
+		// 15 | assertText | xpath=//div[@id='welcome']/div[2]/h1 | Welcome!
+		{
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'welcome\']/div[2]/h1")));
+		}
+		assertEquals(driver.findElement(By.xpath("//div[@id=\'welcome\']/div[2]/h1")).getText(), "Welcome!");
+	}
 }

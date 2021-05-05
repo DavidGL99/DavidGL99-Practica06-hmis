@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -24,65 +25,72 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 public class RegistrodeusuariocorreoCasoincorrectoTest {
-  private WebDriver driver;
-  private Map<String, Object> vars;
-  JavascriptExecutor js;
-  @Before
-  public void setUp() {
-	System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
-	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    driver = new FirefoxDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-  @After
-  public void tearDown() {
-    driver.quit();
-  }
-  @Test
-  public void registrodeusuariocorreoCasoincorrecto() {
-    // Test name: Registro de usuario correo (Caso incorrecto)
-    // Step # | name | target | value
-    // 1 | open | / | 
-	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
-    // 2 | setWindowSize | 1280x720 | 
-    driver.manage().window().setSize(new Dimension(1280, 720));
-    // 3 | click | linkText=Sign up | 
-    driver.findElement(By.linkText("Sign up")).click();
-    // 4 | click | id=full-name | 
-    driver.findElement(By.id("full-name")).click();
-    // 5 | type | id=full-name | gmm752
-    driver.findElement(By.id("full-name")).sendKeys("gmm752");
-    // 6 | click | id=email-address | 
-    driver.findElement(By.id("email-address")).click();
-    // 7 | click | css=.container-fluid | 
-    driver.findElement(By.cssSelector(".container-fluid")).click();
-    // 8 | click | id=password | 
-    driver.findElement(By.id("password")).click();
-    // 9 | click | css=.container-fluid | 
-    driver.findElement(By.cssSelector(".container-fluid")).click();
-    // 10 | click | id=email-address | 
-    driver.findElement(By.id("email-address")).click();
-    // 11 | type | id=email-address | fasfsa
-    driver.findElement(By.id("email-address")).sendKeys("fasfsa");
-    // 12 | click | css=.container-fluid | 
-    driver.findElement(By.cssSelector(".container-fluid")).click();
-    // 13 | click | id=password | 
-    driver.findElement(By.id("password")).click();
-    // 14 | type | id=confirm-password | nAvXT6vYTnqa22e
-    driver.findElement(By.id("confirm-password")).sendKeys("nAvXT6vYTnqa22e");
-    // 15 | type | id=password | nAvXT6vYTnqa22e
-    driver.findElement(By.id("password")).sendKeys("nAvXT6vYTnqa22e");
-    // 16 | click | id=terms-agreement | 
-    driver.findElement(By.id("terms-agreement")).click();
-    // 17 | click | css=.ajax-button | 
-    driver.findElement(By.cssSelector(".ajax-button")).click();
-    // 18 | executeScript | return document.getElementById("email-address").validationMessage | message
-    vars.put("message", js.executeScript("return document.getElementById(\"email-address\").validationMessage"));
-    // 19 | echo | ${message} | 
-    System.out.println(vars.get("message").toString());
-    // 20 | assert | message | Introduzca una dirección de correo.
-    assertEquals(vars.get("message").toString(), "Introduzca una dirección de correo.");
-  }
+	private WebDriver driver;
+	private Map<String, Object> vars;
+	JavascriptExecutor js;
+
+	@Before
+	public void setUp() {
+		// System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+		// System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
+		firefoxOptions.setHeadless(true);
+		driver = new FirefoxDriver();
+		js = (JavascriptExecutor) driver;
+		vars = new HashMap<String, Object>();
+	}
+
+	@After
+	public void tearDown() {
+		driver.quit();
+	}
+
+	@Test
+	public void registrodeusuariocorreoCasoincorrecto() {
+		// Test name: Registro de usuario correo (Caso incorrecto)
+		// Step # | name | target | value
+		// 1 | open | / |
+		driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
+		// 2 | setWindowSize | 1280x720 |
+		driver.manage().window().setSize(new Dimension(1280, 720));
+		// 3 | click | linkText=Sign up |
+		driver.findElement(By.linkText("Sign up")).click();
+		// 4 | click | id=full-name |
+		driver.findElement(By.id("full-name")).click();
+		// 5 | type | id=full-name | gmm752
+		driver.findElement(By.id("full-name")).sendKeys("gmm752");
+		// 6 | click | id=email-address |
+		driver.findElement(By.id("email-address")).click();
+		// 7 | click | css=.container-fluid |
+		driver.findElement(By.cssSelector(".container-fluid")).click();
+		// 8 | click | id=password |
+		driver.findElement(By.id("password")).click();
+		// 9 | click | css=.container-fluid |
+		driver.findElement(By.cssSelector(".container-fluid")).click();
+		// 10 | click | id=email-address |
+		driver.findElement(By.id("email-address")).click();
+		// 11 | type | id=email-address | fasfsa
+		driver.findElement(By.id("email-address")).sendKeys("fasfsa");
+		// 12 | click | css=.container-fluid |
+		driver.findElement(By.cssSelector(".container-fluid")).click();
+		// 13 | click | id=password |
+		driver.findElement(By.id("password")).click();
+		// 14 | type | id=confirm-password | nAvXT6vYTnqa22e
+		driver.findElement(By.id("confirm-password")).sendKeys("nAvXT6vYTnqa22e");
+		// 15 | type | id=password | nAvXT6vYTnqa22e
+		driver.findElement(By.id("password")).sendKeys("nAvXT6vYTnqa22e");
+		// 16 | click | id=terms-agreement |
+		driver.findElement(By.id("terms-agreement")).click();
+		// 17 | click | css=.ajax-button |
+		driver.findElement(By.cssSelector(".ajax-button")).click();
+		// 18 | executeScript | return
+		// document.getElementById("email-address").validationMessage | message
+		vars.put("message", js.executeScript("return document.getElementById(\"email-address\").validationMessage"));
+		// 19 | echo | ${message} |
+		System.out.println(vars.get("message").toString());
+		// 20 | assert | message | Introduzca una dirección de correo.
+		assertEquals(vars.get("message").toString(), "Introduzca una dirección de correo.");
+	}
 }

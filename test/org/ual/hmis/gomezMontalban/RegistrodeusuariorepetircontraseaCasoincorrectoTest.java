@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -24,43 +25,51 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 public class RegistrodeusuariorepetircontraseaCasoincorrectoTest {
-  private WebDriver driver;
-  private Map<String, Object> vars;
-  JavascriptExecutor js;
-  @Before
-  public void setUp() {
-	System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
-	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    driver = new FirefoxDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-  @After
-  public void tearDown() {
-    driver.quit();
-  }
-  @Test
-  public void registrodeusuariorepetircontraseaCasoincorrecto() {
-    // Test name: Registro de usuario repetir contraseña (Caso incorrecto)
-    // Step # | name | target | value
-    // 1 | open | / | 
-	  driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
-    // 2 | setWindowSize | 1280x722 | 
-    driver.manage().window().setSize(new Dimension(1280, 722));
-    // 3 | click | linkText=Sign up | 
-    driver.findElement(By.linkText("Sign up")).click();
-    // 4 | type | id=full-name | gmm753
-    driver.findElement(By.id("full-name")).sendKeys("gmm753");
-    // 5 | type | id=password | nAvXT6vYTnqa22e
-    driver.findElement(By.id("password")).sendKeys("nAvXT6vYTnqa22e");
-    // 6 | type | id=email-address | gmm753@inlumine.ual.es
-    driver.findElement(By.id("email-address")).sendKeys("gmm753@inlumine.ual.es");
-    // 7 | click | id=terms-agreement | 
-    driver.findElement(By.id("terms-agreement")).click();
-    // 8 | click | css=.ajax-button | 
-    driver.findElement(By.cssSelector(".ajax-button")).click();
-    // 9 | assertText | css=.invalid-feedback | Your password and confirmation do not match.
-    assertEquals(driver.findElement(By.cssSelector(".invalid-feedback")).getText(), "Your password and confirmation do not match.");
-  }
+	private WebDriver driver;
+	private Map<String, Object> vars;
+	JavascriptExecutor js;
+
+	@Before
+	public void setUp() {
+		//System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
+		firefoxOptions.setHeadless(true);
+		driver = new FirefoxDriver();
+		js = (JavascriptExecutor) driver;
+		vars = new HashMap<String, Object>();
+	}
+
+	@After
+	public void tearDown() {
+		driver.quit();
+	}
+
+	@Test
+	public void registrodeusuariorepetircontraseaCasoincorrecto() {
+		// Test name: Registro de usuario repetir contraseña (Caso incorrecto)
+		// Step # | name | target | value
+		// 1 | open | / |
+		driver.get("http://gomezmontalban-sesion06.eastus.cloudapp.azure.com/");
+		// 2 | setWindowSize | 1280x722 |
+		driver.manage().window().setSize(new Dimension(1280, 722));
+		// 3 | click | linkText=Sign up |
+		driver.findElement(By.linkText("Sign up")).click();
+		// 4 | type | id=full-name | gmm753
+		driver.findElement(By.id("full-name")).sendKeys("gmm753");
+		// 5 | type | id=password | nAvXT6vYTnqa22e
+		driver.findElement(By.id("password")).sendKeys("nAvXT6vYTnqa22e");
+		// 6 | type | id=email-address | gmm753@inlumine.ual.es
+		driver.findElement(By.id("email-address")).sendKeys("gmm753@inlumine.ual.es");
+		// 7 | click | id=terms-agreement |
+		driver.findElement(By.id("terms-agreement")).click();
+		// 8 | click | css=.ajax-button |
+		driver.findElement(By.cssSelector(".ajax-button")).click();
+		// 9 | assertText | css=.invalid-feedback | Your password and confirmation do
+		// not match.
+		assertEquals(driver.findElement(By.cssSelector(".invalid-feedback")).getText(),
+				"Your password and confirmation do not match.");
+	}
 }
