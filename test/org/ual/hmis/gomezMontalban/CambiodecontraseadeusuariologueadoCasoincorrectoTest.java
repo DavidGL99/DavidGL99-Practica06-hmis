@@ -38,7 +38,7 @@ public class CambiodecontraseadeusuariologueadoCasoincorrectoTest {
 
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		firefoxOptions.setHeadless(true);
-		driver = new FirefoxDriver();
+		driver = new FirefoxDriver(firefoxOptions);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 	}
