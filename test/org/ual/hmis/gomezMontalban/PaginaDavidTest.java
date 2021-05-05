@@ -33,8 +33,8 @@ public class PaginaDavidTest {
 
 	@Before
 	public void setUp() {
-		// System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-		// System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		firefoxOptions.setHeadless(true);
 		driver = new FirefoxDriver(firefoxOptions);
@@ -58,6 +58,5 @@ public class PaginaDavidTest {
 		// 3 | click | id=pagina-david |
 		driver.findElement(By.id("pagina-david")).click();
 		// 4 | click | css=.d-block |
-		driver.findElement(By.cssSelector(".d-block")).click();
 	}
 }
