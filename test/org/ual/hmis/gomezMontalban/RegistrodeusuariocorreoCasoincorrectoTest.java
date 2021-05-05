@@ -91,6 +91,6 @@ public class RegistrodeusuariocorreoCasoincorrectoTest {
 		// 19 | echo | ${message} |
 		System.out.println(vars.get("message").toString());
 		// 20 | assert | message | Introduzca una dirección de correo.
-		assertEquals(vars.get("message").toString(), "Introduzca una dirección de correo.");
+		assertEquals(vars.get("message").toString(), "Please enter an email address.");
 	}
 }
