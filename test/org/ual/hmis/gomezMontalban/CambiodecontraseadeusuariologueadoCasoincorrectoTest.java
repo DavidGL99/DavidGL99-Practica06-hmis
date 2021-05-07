@@ -26,7 +26,6 @@ import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 public class CambiodecontraseadeusuariologueadoCasoincorrectoTest {
 	private WebDriver driver;
 	private Map<String, Object> vars;
@@ -44,6 +43,7 @@ public class CambiodecontraseadeusuariologueadoCasoincorrectoTest {
 		vars = new HashMap<String, Object>();
 	}
 
+	
 	@After
 	public void tearDown() {
 		driver.quit();
