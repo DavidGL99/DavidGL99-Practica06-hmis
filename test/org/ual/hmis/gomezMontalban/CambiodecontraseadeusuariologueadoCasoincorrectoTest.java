@@ -43,7 +43,6 @@ public class CambiodecontraseadeusuariologueadoCasoincorrectoTest {
 		vars = new HashMap<String, Object>();
 	}
 
-	
 	@After
 	public void tearDown() {
 		driver.quit();
